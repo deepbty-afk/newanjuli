@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Stay Happy Anjuli 💖</title>
+<style>
+body {
+    margin: 0;
+    overflow: hidden;
+    background: radial-gradient(circle at top, #1a1a2e, #000);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.message {
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: #fff;
+    z-index: 10;
+}
+
+.message h1 {
+    font-size: 3em;
+    background: linear-gradient(90deg, #ff4ecd, #4efcff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: glow 2s infinite alternate;
+}
+
+.message p {
+    font-size: 1.4em;
+    color: #ffd6ff;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 10px #ff4ecd; }
+    to { text-shadow: 0 0 25px #4efcff; }
+}
+
+/* Photo section */
+.photos {
+    position: absolute;
+    bottom: 8%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    z-index: 10;
+}
+
+.photos img {
+    width: 160px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(255, 78, 205, 0.7);
+    animation: float 4s ease-in-out infinite;
+}
+
+.photos img:nth-child(2) {
+    animation-delay: 1s;
+}
+.photos img:nth-child(3) {
+    animation-delay: 2s;
+}
+
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0); }
+}
+
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+</style>
+</head>
+<body>
+
+<div class="message">
+    <h1>Anjuli 🌸</h1>
+    <p>Enjoy your life<br>and always stay happy 💫</p>
+</div>
+
+<div class="photos">
+    <img src="biar2.jpeg" alt="Anjuli photo 1">
+    <img src="biba4.jpeg" alt="Anjuli photo 2">
+    <img src="biba45.jpeg" alt="Anjuli photo 3">
+    <img src="bibarge.jpeg" alt="Anjuli photo 4">
+    <img src="bibbar3.jpeg" alt="Anjuli photo 5">
+</div>
+<canvas id="confetti"></canvas>
+
+<script>
+const canvas = document.getElementById("confetti");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const colors = ["#ff4ecd", "#4efcff", "#ffd93d", "#6cff4e", "#ff6b6b"];
+let pieces = [];
+
+for (let i = 0; i < 120; i++) {
+    pieces.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 6 + 4,
+        speed: Math.random() * 3 + 2,
+        color: colors[Math.floor(Math.random() * colors.length)]
+    });
+}
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    pieces.forEach(p => {
+        ctx.fillStyle = p.color;
+        ctx.fillRect(p.x, p.y, p.size, p.size);
+        p.y += p.speed;
+        if (p.y > canvas.height) {
+            p.y = -10;
+            p.x = Math.random() * canvas.width;
+        }
+    });
+    requestAnimationFrame(animate);
+}
+animate();
+
+window.onresize = () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+};
+</script>
+
+</body>
+</html>
